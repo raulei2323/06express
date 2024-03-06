@@ -1,13 +1,14 @@
 const express = require('express')
 const router = express.Router()
-
+const userUseCases = require('../utils/userUseCase')
+const authMiddlewares = require('../middlewares/auth')
 //?CRUD user: Create(post), Read(get), Update(put), Delete(delete)
 
 router.post('/', async (req, res) => {
     try{
       const user = req.body
-      //TODO create user
-      res.status(201).send({message: "User created", data: user})
+      const newUser = await userUseCases.createUser(user)
+      res.status(201).send({message: "User created", data: newUser})
 
     } catch (error){
         res.status(400).send({message: error})
@@ -16,8 +17,7 @@ router.post('/', async (req, res) => {
 
 router.get('/', async (req, res) => {
   try{
-    const users = []
-    //TODO get users
+    const users = await userUseCases.getUsers()
     res.send({message: "All Users", data : users})
 
   } catch (error){
@@ -25,22 +25,23 @@ router.get('/', async (req, res) => {
   }
 })
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', authMiddlewares.validUserId, async (req, res) => {
   try{
     const user = req.body
     const { id } = req.params
-    //TODO update user
-    res.send({message: "User updated",data: user})
+    const updatedUser = await userUseCases.updateUser(id, user)
+
+    res.send({message: "User updated",data: updatedUser })
 
   } catch (error){
       res.status(400).send({message: error})
   }
 })
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', authMiddlewares.validUserId, async (req, res) => {
   try{
     const { id } = req.params
-    //TODO delete user
+    await userUseCases.deleteUser(id)
     res.send({message: "User deleted"})
 
   } catch (error){

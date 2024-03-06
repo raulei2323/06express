@@ -1,0 +1,35 @@
+[
+    {
+        "id": 1,
+        "first_name": "Thaine",
+        "last_name": "Draper",
+        "email": "tdraper0@bloglovin.com",
+        "gender": "Male",
+        "password": "nB1)gTXtpn9"
+    },
+    {
+        "id": 2,
+        "first_name": "John",
+        "last_name": "Hilton",
+        "email": "jhilto0@bloglovin.com",
+        "gender": "Male",
+        "password": "oenjiewpckj00"
+    },
+    {
+        "id": 3,
+        "first_name": "Joss",
+        "last_name": "Mand",
+        "email": "jmand@bloglovin.com",
+        "gender": "Female",
+        "password": "nc68jppjdeoj"
+    },
+    {
+        "id": 4,
+        "first_name": "Deb",
+        "last_name": "Smith",
+        "email": "dsmith@bloglovin.com",
+        "gender": "Female",
+        "password": "hG4oksidcsiji"
+    },
+    {}
+]
