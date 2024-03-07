@@ -2,14 +2,16 @@ const express = require('express')
 const router = express.Router()
 const userUseCases = require('../utils/userUseCase')
 const authMiddlewares = require('../middlewares/auth')
+const User = require('../models/usersModel')
+
 //?CRUD user: Create(post), Read(get), Update(put), Delete(delete)
 
 router.post('/', async (req, res) => {
     try{
       const user = req.body
-      const newUser = await userUseCases.createUser(user)
+      const newUser = await User.create(user) //userUseCases.createUser(user)
+      await newUser.save()
       res.status(201).send({message: "User created", data: newUser})
-
     } catch (error){
         res.status(400).send({message: error})
     }
@@ -17,7 +19,7 @@ router.post('/', async (req, res) => {
 
 router.get('/', async (req, res) => {
   try{
-    const users = await userUseCases.getUsers()
+    const users = await User.find()
     res.send({message: "All Users", data : users})
 
   } catch (error){
